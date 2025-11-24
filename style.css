@@ -1,0 +1,240 @@
+/* --- CSS: TRANG TRÍ GIAO DIỆN --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fdfdfd;
+}
+
+.container {
+    width: 900px;
+    height: 650px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Phần Hình ảnh bên trái */
+.image-section {
+    flex: 1;
+    width: 50%;
+    height: 100%;
+}
+
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Phần Form bên phải */
+.form-section {
+    flex: 1;
+    width: 50%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Logo Minimal */
+.brand-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5rem;
+    color: #dcd6c8; /* Màu be */
+    margin-bottom: 10px;
+}
+
+.form-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 25px;
+    text-transform: uppercase;
+}
+
+/* Form styling */
+.form-box {
+    width: 100%;
+    display: none; /* Ẩn mặc định */
+    animation: fadeIn 0.5s ease;
+}
+
+.form-box.active {
+    display: block; /* Hiện khi có class active */
+}
+
+.input-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+    font-size: 0.9rem;
+}
+
+.input-group input:focus {
+    border-color: #aaa;
+}
+
+/* Radio button cho giới tính */
+.gender-group {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+}
+.gender-group label { margin-right: 10px; margin-left: 5px; }
+
+/* Checkbox & Quên mật khẩu */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.actions a {
+    text-decoration: none;
+    color: #888;
+    cursor: pointer;
+}
+
+.actions a:hover {
+    color: #d0c4ac;
+}
+
+/* Nút bấm chính */
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #e0d6c2;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+    margin-bottom: 20px;
+}
+
+.btn-submit:hover {
+    background-color: #d1c5ae;
+}
+
+/* Social Login */
+.social-login {
+    text-align: center;
+    margin-top: 10px;
+}
+.social-login p { font-size: 0.8rem; color: #888; margin-bottom: 10px; }
+
+.social-btns {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.s-btn {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #555;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border-radius: 3px;
+}
+
+.s-btn.google { color: #db4437; }
+.s-btn.facebook { color: #4267B2; }
+
+/* Chuyển đổi trang */
+.switch-page {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.switch-page a {
+    color: #d1c5ae;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Hiệu ứng */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.required-star { color: red; font-size: 0.8rem; }
+
+/* Thanh cuộn cho form dài */
+.scrollable-form {
+    max-height: 450px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+.scrollable-form::-webkit-scrollbar { width: 5px; }
+.scrollable-form::-webkit-scrollbar-thumb { background: #eee; border-radius: 5px; }
+
+
+/* --- CSS CHO CHỨC NĂNG SHOW/HIDE PASSWORD --- */
+
+.password-container {
+    position: relative;
+    width: 100%;
+}
+/* Tạo khoảng trống bên phải input để chứa icon */
+.password-container input {
+    width: 100%; 
+    padding-right: 40px !important; /* Dùng !important để đảm bảo ghi đè padding cũ */
+}
+/* Định vị icon */
+.password-container i {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    cursor: pointer; /* Thay đổi chuột thành biểu tượng tay để người dùng biết có thể bấm */
+    color: #aaa;
+    font-size: 0.9rem;
+    z-index: 10;
+}
