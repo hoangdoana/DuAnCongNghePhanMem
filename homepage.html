@@ -19,7 +19,7 @@
                 <a href="#"><i class="fas fa-tags"></i> Khuyến mãi</a>
             </div>
             <div class="account-actions">
-                <a href="#" id="welcome-user"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                <a href="profile.html" id="welcome-user"><i class="fas fa-user-circle"></i> Đăng nhập</a>
                 <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a> 
             </div>
         </div>
@@ -38,46 +38,99 @@
 
     <main>
         <nav class="main-nav">
-            <div class="menu-title"><i class="fas fa-list"></i> Danh mục sản phẩm</div>
-            <div class="notification-icon">
-                    <i class="fas fa-bell"></i>
-                </div>
-        </nav>
+    <div class="menu-title">
+        <a href="product_search.html" style="color: inherit; text-decoration: none;">
+            <i class="fas fa-list"></i> Danh mục sản phẩm
+        </a>
+    </div>
+    <div class="notification-icon">
+        <i class="fas fa-bell"></i>
+    </div>
+</nav>
         
         <section class="content-wrapper">
             <aside class="sidebar-menu">
                 <ul>
                     <li><a href="#">Trang Chủ</a></li>
-                    <li><a href="#">Sản phẩm bán chạy <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Sản phẩm mới ra mắt <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Sản phẩm sắp ra mắt <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Men's wear <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Women's wear <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Kid's wear <i class="fas fa-chevron-right"></i></a></li>
-                    <li><a href="#">Giày</a></li>
-                    <li><a href="#">Phụ kiện</a></li>
+                    <li><a href="product.html?id=white_blazer">Sản phẩm bán chạy <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="product.html?id=white_T-shirt">Sản phẩm mới ra mắt <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="product.html?id=black_blazer">Sản phẩm sắp ra mắt <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="product.html?id=white_blazer">Men's wear <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="product.html?id=white_T-shirt">Women's wear <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="product.html?id=black_blazer">Kid's wear <i class="fas fa-chevron-right"></i></a></li>
+                    <li><a href="product.html?id=white_blazer">Giày</a></li>
+                    <li><a href="product.html?id=white_T-shirt">Phụ kiện</a></li>
                 </ul>
                 
             </aside>
 
             <div class="main-content">
-                
-                <div class="slider-area">
-                    <img src="image/hinh_nen.jpg" alt="Banner" class="main-banner-img">
-                    <i class="fas fa-chevron-left slider-arrow left"></i>
-                    <i class="fas fa-chevron-right slider-arrow right"></i>
-                    <div class="slider-dots">
-                        <span class="dot active"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                        <span class="dot"></span>
-                    </div>
-                </div>
+                <div class="main-banner-slider">
+                    <button class="slider-btn prev-btn" onclick="moveSlider(-1)">&#10094;</button>
+                    
+                    <div class="slider-track" id="sliderTrack">
+                        
+                        <div class="slide-item">
+                            <a href="#"> 
+                                <img src="image/hinh_nen.jpg" alt="Banner Chào mừng">
+                                <div class="slide-content">
+                                    <h1>Chào mừng đến với Minimal</h1>
+                                    <p>Khám phá bộ sưu tập tối giản mới nhất.</p>
+                                    <span class="btn-shop-now">Mua sắm ngay</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="slide-item">
+                            <a href="product.html?id=white_blazer">
+                                <img src="image/ao vest.jpg" alt="White Blazer"> 
+                                <div class="slide-content product-slide">
+                                    <h2>White Blazer</h2>
+                                    <p>Màu sắc tinh khôi, sự lựa chọn hoàn hảo.</p>
+                                    <span class="btn-shop-now">Xem chi tiết</span>
+                                </div>
+                            </a>
+                        </div>
+                        
+                        <div class="slide-item">
+                            <a href="product.html?id=white_T-shirt">
+                                <img src="image/ao vest 1.jpg" alt="White T-shirt"> 
+                                <div class="slide-content product-slide">
+                                    <h2>White T-shirt</h2>
+                                    <p>Áo phông trắng cơ bản, phong cách tối giản.</p>
+                                    <span class="btn-shop-now">Xem chi tiết</span>
+                                </div>
+                            </a>
+                        </div>
 
+                        <div class="slide-item">
+                            <a href="product.html?id=black_blazer">
+                                <img src="image/ao vest 2.jpg" alt="Black Blazer">
+                                <div class="slide-content product-slide">
+                                    <h2>Black Blazer</h2>
+                                    <p>Áo khoác len sang trọng mang phong cách quý tộc</p>
+                                    <span class="btn-shop-now">Xem chi tiết</span>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                    
+                    <button class="slider-btn next-btn" onclick="moveSlider(1)">&#10095;</button>
+
+                    <div class="slider-dots" id="sliderDots">
+                        <span class="dot" onclick="goToSlide(0)"></span>
+                        <span class="dot" onclick="goToSlide(1)"></span>
+                        <span class="dot" onclick="goToSlide(2)"></span>
+                        <span class="dot" onclick="goToSlide(3)"></span>
+                    </div>
+
+                </div>
                 <div class="best-seller-section">
+                    <a href="product.html?id=white_blazer">
                     <h2 class="section-title">Best-seller</h2>
                     <div class="best-seller-box">
-                        <img src="image/ao vest.jpg" alt="Mô tả sản phẩm" class="product-image-small">
+                        <img src="image/ao vest.jpg" alt="White Blazer" class="product-image-small">
                         <div class="product-info-box">
                             <h3>Bộ sưu tập Classic Blazer</h3>
                             <p>Classic Blazer: Phong cách tối giản, thanh lịch, đường may tinh tế và chất liệu cao cấp. </p>
@@ -86,47 +139,49 @@
                             <button class="view-more-btn">Mua ngay</button>
                         </div>
                     </div>
+                    </a>
                 </div>
 
                 <div class="product-grid-section">
                     <h2 class="section-title">Sản phẩm bán chạy</h2>
                     <div class="product-grid">
-                        <div class="product-card">
-                            <img src="image/ao vest.jpg" alt="Sản phẩm" class="card-img">
+
+                        <a href="product.html?id=white_blazer" class="product-card">
+                            <img src="image/ao vest.jpg" alt="White Blazer" class="card-img">
                             <div class="discount-tag">-20%</div>
                             <p class="card-name">White Blazer</p>
                             <p class="card-price">450.000₫</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="image/ao vest 1.jpg" alt="Sản phẩm" class="card-img">
+                        </a>
+                        <a href="product.html?id=white_T-shirt" class="product-card">
+                            <img src="image/ao vest 1.jpg" alt="White T-shirt" class="card-img">
                             <div class="discount-tag">-10%</div>
                             <p class="card-name">White T-shirt</p>
                             <p class="card-price">129.000₫</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="image/ao vest 2.jpg" alt="Sản phẩm" class="card-img">
+                        </a>
+                        <a href="product.html?id=black_blazer" class="product-card">
+                            <img src="image/ao vest 2.jpg" alt="Black Blazer" class="card-img">
                             <div class="discount-tag">-15%</div>
-                            <p class="card-name">The Handbag</p>
+                            <p class="card-name">Black Blazer</p>
                             <p class="card-price">400.000₫</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="image/ao vest.jpg" alt="Sản phẩm" class="card-img">
+                        </a>
+                        <a href="product.html?id=white_blazer" class="product-card">
+                            <img src="image/ao vest.jpg" alt="White Blazer" class="card-img">
                             <div class="discount-tag">-20%</div>
                             <p class="card-name">White Blazer</p>
                             <p class="card-price">450.000₫</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="image/ao vest 1.jpg" alt="Sản phẩm" class="card-img">
+                        </a>
+                        <a href="product.html?id=white_T-shirt" class="product-card">
+                            <img src="image/ao vest 1.jpg" alt="White T-shirt" class="card-img">
                             <div class="discount-tag">-20%</div>
-                            <p class="card-name">White Blazer</p>
-                            <p class="card-price">450.000₫</p>
-                        </div>
-                        <div class="product-card">
-                            <img src="image/ao vest 2.jpg" alt="Sản phẩm" class="card-img">
+                            <p class="card-name">White T-shirt</p>
+                            <p class="card-price">129.000₫</p>
+                        </a>
+                        <a href="product.html?id=black_blazer" class="product-card">
+                            <img src="image/ao vest 2.jpg" alt="Black Blazer" class="card-img">
                             <div class="discount-tag">-20%</div>
-                            <p class="card-name">White Blazer</p>
-                            <p class="card-price">450.000₫</p>
-                        </div>
+                            <p class="card-name">Black Blazer</p>
+                            <p class="card-price">400.000₫</p>
+                        </a>
                     </div>
                 </div>
 
@@ -135,52 +190,55 @@
             <div class="right-product-column">
                 <div class="product-list-right">
                     <h4 class="right-column-title">Đồ nam bán chạy</h4>
-                    <div class="small-product-item">
-                        <img src="image/ao vest.jpg" alt="Áo" class="small-img">
+
+                    <a href="product.html?id=white_blazer" class="small-product-item">
+                        <img src="image/ao vest.jpg" alt="White Blazer" class="small-img">
                         <div class="small-info">
                             <p class="small-name">White Blazer</p>
                             <p class="small-price">450.000₫</p>
                         </div>
-                    </div>
-                    <div class="small-product-item">
-                        <img src="image/ao vest 1.jpg" alt="Áo" class="small-img">
+                    </a>
+                    <a href="product.html?id=white_T-shirt" class="small-product-item">
+                        <img src="image/ao vest 1.jpg" alt="White T-shirt" class="small-img">
                         <div class="small-info">
-                            <p class="small-name">White Blazer</p>
-                            <p class="small-price">450.000₫</p>
+                            <p class="small-name">White T-shirt</p>
+                            <p class="small-price">129.000₫</p>
                         </div>
-                    </div>
-                    <div class="small-product-item">
-                        <img src="image/ao vest 2.jpg" alt="Áo" class="small-img">
+                    </a>
+                    <a href="product.html?id=black_blazer" class="small-product-item">
+                        <img src="image/ao vest 2.jpg" alt="Black Blazer" class="small-img">
                         <div class="small-info">
-                            <p class="small-name">White Blazer</p>
-                            <p class="small-price">450.000₫</p>
+                            <p class="small-name">Black Blazer</p>
+                            <p class="small-price">400.000₫</p>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 
                 <div class="product-list-right">
                     <h4 class="right-column-title">Đồ nữ bán chạy</h4>
-                     <div class="small-product-item">
-                        <img src="image/ao vest.jpg" alt="Áo" class="small-img">
+
+                    <a href="product.html?id=white_blazer" class="small-product-item">
+                        <img src="image/ao vest.jpg" alt="White Blazer" class="small-img">
                         <div class="small-info">
-                            <p class="small-name">The handbag</p>
+                            <p class="small-name">White Blazer</p>
+                            <p class="small-price">450.000₫</p>
+                        </div>
+                    </a>
+                    <a href="product.html?id=white_T-shirt" class="small-product-item">
+                        <img src="image/ao vest 1.jpg" alt="White T-shirt" class="small-img">
+                        <div class="small-info">
+                            <p class="small-name">White T-shirt</p>
+                            <p class="small-price">129.000₫</p>
+                        </div>
+                    </a>
+                    <a href="product.html?id=black_blazer" class="small-product-item">
+                        <img src="image/ao vest 2.jpg" alt="Black Blazer" class="small-img">
+                        <div class="small-info">
+                            <p class="small-name">Black Blazer</p>
                             <p class="small-price">400.000₫</p>
                         </div>
-                    </div>
-                     <div class="small-product-item">
-                        <img src="image/ao vest 1.jpg" alt="Áo" class="small-img">
-                        <div class="small-info">
-                            <p class="small-name">The handbag</p>
-                            <p class="small-price">400.000₫</p>
-                        </div>
-                    </div>
-                     <div class="small-product-item">
-                        <img src="image/ao vest 2.jpg" alt="Áo" class="small-img">
-                        <div class="small-info">
-                            <p class="small-name">The handbag</p>
-                            <p class="small-price">400.000₫</p>
-                        </div>
-                    </div>
+                    </a>
+                </div>
                 </div>
             </div>
         </section>
@@ -212,7 +270,7 @@
             </div>
             <div class="col">
                 <h4>Đối tác vận chuyển</h4>
-                 <img src="image/shipping.jpg" alt="Shipping" style="max-width: 200px; height: auto;">
+                <img src="image/shipping.jpg" alt="Shipping" style="max-width: 200px; height: auto;">
             </div>
         </div>
         <div class="mobile-apps">
@@ -220,24 +278,7 @@
             </div>
     </footer>
 
-    <script>
-        // LOGIC KIỂM TRA ĐĂNG NHẬP VÀ HIỂN THỊ TÊN NGƯỜI DÙNG
-        const currentUser = localStorage.getItem('currentUser');
-        const welcomeElement = document.getElementById('welcome-user');
-        
-        // 1. Nếu CHƯA đăng nhập, chuyển hướng về trang login
-        if (!currentUser) {
-            window.location.href = 'index.html';
-        } else {
-            // 2. Nếu đã đăng nhập, hiển thị tên người dùng
-            welcomeElement.innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser}`;
-        }
-
-        // 3. Hàm Đăng xuất
-        function logout() {
-            localStorage.removeItem('currentUser'); // Xóa phiên đăng nhập
-            window.location.href = 'index.html'; // Quay về trang login
-        }
-    </script>
+    <script src="script.js"></script>
+    
 </body>
 </html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân - Minimal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    
+    <header>
+        <div class="top-header">
+            <div class="contact">
+                <a href="#"><i class="fas fa-question-circle"></i> Liên hệ hỗ trợ</a>
+                <a href="#"><i class="far fa-bell"></i> Tin tức</a>
+                <a href="#"><i class="fas fa-tags"></i> Khuyến mãi</a>
+            </div>
+            <div class="account-actions">
+                <a href="index.html"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a> 
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="logo">Minimal</div>
+            <div class="cart"><a href="#"><i class="fas fa-shopping-bag"></i> Giỏ hàng (0)</a></div>
+        </div>
+    </header>
+
+    <main class="profile-main">
+        <div class="breadcrumb">
+            <a href="homepage.html">Trang chủ</a> / Thông tin
+        </div>
+        
+        <div class="profile-container">
+            <aside class="profile-sidebar">
+                <ul>
+                    <li class="active"><a href="#">Thông tin cá nhân</a></li>
+                    <li><a href="#">Đơn hàng của bạn</a></li>
+                </ul>
+            </aside>
+            
+            <section class="profile-content">
+                <h2>Thông tin cá nhân</h2>
+
+                <div id="view-section">
+                    <form id="view-form">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            <input type="text" value="a" readonly class="input-readonly" id="view-name">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" value="a1234@gmail.com" readonly class="input-readonly" id="view-email">
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày sinh</label>
+                            <input type="text" value="12/12/2004" readonly class="input-readonly" id="view-birthday">
+                        </div>
+                        <div class="form-group">
+                            <label>Giới tính:</label>
+                            <input type="text" value="Nam" readonly class="input-readonly" id="view-gender">
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Mô tả</label>
+                            <div style="border-bottom: 2px dotted #ccc; padding: 10px 0; color: #333;">
+                                Chào tôi là a, tôi yêu thời trang và thích mua sắm tại Minimal.
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn-update" onclick="toggleEditMode(true)">Thay đổi thông tin cá nhân</button>
+                    </form>
+                </div>
+
+
+
+
+
+                <!--Cập Nhập Thông Tin Cá Nhân-->
+                <div id="edit-section" style="display: none;">
+    <form id="edit-form" class="edit-mode-form">
+        <div class="form-group">
+            <label>Họ và tên</label>
+            <input type="text" value="Giaptin Bieber" class="input-box" id="edit-name">
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" value="a1234@gmail.com" class="input-box" id="edit-email">
+        </div>
+
+        <div class="form-group">
+            <label>Ngày sinh</label>
+            <input type="date" value="2004-12-12" class="input-box" id="edit-birthday">
+        </div>
+        <div class="form-group empty-col"></div>
+
+        <div class="form-group full-width radio-group">
+            <label>Giới tính:</label>
+            <div class="radio-options">
+                <label><input type="radio" name="gender" value="male" checked> Nam</label>
+                <label><input type="radio" name="gender" value="female"> Nữ</label>
+            </div>
+        </div>
+
+        <div class="form-group full-width">
+            <label>Mô tả về bạn (Không bắt buộc)</label>
+            <textarea class="input-box" rows="4" id="edit-description">Chào tôi là a, tôi yêu thời trang và thích mua sắm tại Minimal.</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Mật khẩu mới</label>
+            <input type="password" class="input-box" id="new-password">
+        </div>
+        <div class="form-group">
+            <label>Nhắc lại mật khẩu</label>
+            <input type="password" class="input-box" id="repeat-password">
+        </div>
+        
+        <div class="action-buttons" style="margin-top: 20px;">
+            <button type="button" class="btn-cancel" onclick="toggleEditMode(false)">Hủy bỏ</button>
+            <button type="button" class="btn-update btn-save" onclick="saveProfile()">Cập nhật</button>
+        </div>
+    </form>
+</div>
+
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        </footer>
+
+    <script src="script.js"></script>
+    
+    <script>
+        function toggleEditMode(showEdit) {
+            const viewSection = document.getElementById('view-section');
+            const editSection = document.getElementById('edit-section');
+
+            if (showEdit) {
+                viewSection.style.display = 'none';
+                editSection.style.display = 'block';
+            } else {
+                viewSection.style.display = 'block';
+                editSection.style.display = 'none';
+            }
+        }
+
+        function saveProfile() {
+            // Sau này bạn có thể thêm logic lưu vào database ở đây
+            alert("Thông tin đã được cập nhật!");
+            toggleEditMode(false); // Quay về chế độ xem
+        }
+    </script>
+</body>
+</html>

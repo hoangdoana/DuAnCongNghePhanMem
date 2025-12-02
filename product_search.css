@@ -1,0 +1,279 @@
+/* ======================================================= */
+/* MAIN LAYOUT */
+/* ======================================================= */
+.search-main {
+    max-width: 1400px; /* Tăng max-width để có thêm không gian */
+    margin: 30px auto;
+    padding: 0 40px; /* Tăng padding ngang */
+}
+
+.search-container {
+    display: flex;
+    gap: 40px; /* Tăng khoảng cách giữa Sidebar và Kết quả */
+}
+
+/* ======================================================= */
+/* FILTER SIDEBAR (Bên Trái) */
+/* ======================================================= */
+.filter-sidebar {
+    flex-basis: 280px; /* Tăng chiều rộng Sidebar nhẹ */
+    padding: 15px 20px 15px 0; /* Tăng padding phải, giảm padding trái */
+    border-right: 1px solid #eee;
+    flex-shrink: 0;
+}
+
+.filter-sidebar h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 30px; /* Tăng khoảng cách dưới tiêu đề chính */
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    /* Căn giữa chữ và icon (nếu có icon) */
+    display: flex; 
+    align-items: center;
+}
+.filter-sidebar h3 i {
+    margin-right: 8px; 
+    color: #d1c1b1;
+}
+
+
+.filter-group {
+    margin-bottom: 30px; /* Tăng khoảng cách giữa các nhóm bộ lọc (RẤT QUAN TRỌNG) */
+    padding-bottom: 15px; /* Thêm padding dưới để tách biệt rõ hơn */
+    border-bottom: 1px solid #f0f0f0; /* Viền mờ ngăn cách nhóm */
+}
+.filter-group:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.filter-group h4 {
+    font-size: 15px; /* Tăng kích thước chữ tiêu đề nhóm */
+    font-weight: 700;
+    color: #333; /* Màu đậm hơn cho tiêu đề nhóm */
+    margin-bottom: 12px; /* Tăng khoảng cách dưới tiêu đề nhóm */
+    text-transform: none; /* Bỏ uppercase để trông tự nhiên hơn, trừ khi bạn muốn giữ */
+}
+
+.filter-group label {
+    display: flex; /* Dùng flex để căn checkbox và chữ */
+    align-items: center;
+    font-size: 14px;
+    margin-bottom: 10px; /* Tăng khoảng cách giữa các tùy chọn (RẤT QUAN TRỌNG) */
+    cursor: pointer;
+}
+
+.filter-group input[type="checkbox"] {
+    /* Tăng kích thước checkbox và khoảng cách */
+    transform: scale(1.1); 
+    margin-right: 10px; 
+}
+
+/* Cân đối lại ô nhập giá */
+.filter-group.price-range {
+    margin-bottom: 20px;
+}
+.filter-group.price-range input[type="text"] {
+    width: 90px;
+    padding: 8px 10px; /* Tăng padding để có chiều cao tốt hơn */
+    border: 1px solid #ccc;
+    margin: 0 5px;
+    font-size: 14px;
+    border-radius: 3px;
+    text-align: center;
+}
+
+.btn-apply {
+    display: block;
+    width: 100%;
+    padding: 10px 8px; /* Tăng padding nút */
+    background-color: #d1c1b1;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px; /* Tăng margin trên */
+    transition: background-color 0.2s;
+}
+.btn-apply:hover {
+    background-color: #a99d8d;
+}
+
+
+/* ======================================================= */
+/* SEARCH RESULTS (Bên Phải) */
+/* ======================================================= */
+.search-results {
+    flex-grow: 1;
+}
+
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 20px; /* Tăng khoảng cách dưới header kết quả */
+    border-bottom: 1px solid #eee;
+}
+
+.search-query-info {
+    font-style: italic;
+    color: #666;
+    font-size: 14px;
+}
+
+/* Nút sắp xếp */
+.sort-options button {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+    margin-left: 8px; /* Tăng khoảng cách giữa các nút */
+    border-radius: 3px;
+    font-size: 14px;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.sort-options button.active {
+    background-color: #d1c1b1;
+    color: white;
+    border-color: #d1c1b1;
+}
+
+.select-price {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    margin-left: 8px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+
+.pagination-info {
+    margin-left: 20px;
+    color: #666;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* ======================================================= */
+/* PRODUCT GRID */
+/* ======================================================= */
+.product-grid {
+    display: grid;
+    /* Giữ nguyên 4 cột và tăng khoảng cách */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 25px; /* Tăng khoảng cách giữa các sản phẩm */
+}
+
+.product-item {
+    border: 1px solid #eee;
+    padding: 15px; /* Tăng padding bên trong item sản phẩm */
+    text-align: center;
+    position: relative;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Thêm shadow nhẹ */
+    transition: box-shadow 0.3s;
+}
+.product-item:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.product-item img {
+    width: 100%;
+    height: 200px; /* Cố định chiều cao ảnh */
+    object-fit: cover;
+    display: block;
+    margin-bottom: 15px; /* Tăng khoảng cách dưới ảnh */
+}
+
+.discount-badge {
+    position: absolute;
+    top: 15px; /* Dịch xuống dưới một chút */
+    right: 15px; /* Dịch vào trong một chút */
+    background-color: #cc0000; /* Màu đỏ nổi bật */
+    color: white;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+
+.product-name {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 15px;
+    color: #333;
+}
+
+.product-price {
+    color: #cc0000; /* Màu đỏ nổi bật */
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #999;
+    font-weight: normal;
+    font-size: 13px;
+    margin-left: 8px;
+}
+
+.product-meta {
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #f5f5f5; /* Thêm đường viền nhẹ cho meta */
+}
+
+.product-meta i {
+    color: gold;
+}
+
+/* ======================================================= */
+/* PAGINATION CONTROLS */
+/* ======================================================= */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; /* Giảm gap giữa các nút phân trang */
+    margin: 40px 0 20px 0; /* Tăng margin trên */
+}
+
+.pagination-controls button, .page-number {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.page-number.active {
+    background-color: #d1c1b1;
+    color: white;
+    border-color: #d1c1b1;
+}
+
+.pagination-controls button:hover, .page-number:not(.active):hover {
+    background-color: #f5f5f5;
+}
+
+
+/* Đảm bảo liên kết trên tên sản phẩm không bị gạch chân */
+.product-name a.product-name-link {
+    color: inherit; 
+    text-decoration: none;
+}
+
+.product-name a.product-name-link:hover {
+    color: #d1c1b1; 
+    text-decoration: underline; 
+}

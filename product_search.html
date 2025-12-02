@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tìm kiếm sản phẩm - Minimal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="profile.css"> 
+    <link rel="stylesheet" href="product_search.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    
+    <header>
+       <div class="top-header">
+            <div class="contact">
+                <a href="#"><i class="fas fa-question-circle"></i> Liên hệ hỗ trợ</a>
+                <a href="#"><i class="far fa-bell"></i> Tin tức</a>
+                <a href="#"><i class="fas fa-tags"></i> Khuyến mãi</a>
+            </div>
+            <div class="account-actions">
+                <a href="profile.html" id="welcome-user"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a> 
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="logo">Minimal</div>
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm kiếm sản phẩm">
+                <button><i class="fas fa-search"></i> Tìm kiếm</button>
+            </div>
+            <div class="cart">
+                <a href="#"><i class="fas fa-shopping-bag"></i> Giỏ hàng (0)</a>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <div class="menu-title"><i class="fas fa-list"></i> Danh mục sản phẩm</div>
+            <div class="notification-icon">
+                <i class="fas fa-bell"></i>
+            </div>
+        </nav>
+    </header>
+
+    <main class="search-main">
+        <div class="breadcrumb">
+            <a href="homepage.html">Trang chủ</a> / <a href="#">Áo</a> / <a href="#">Đồ nam</a>
+        </div>
+        
+        <div class="search-container">
+            <aside class="filter-sidebar">
+                <h3><i class="fas fa-filter"></i> Bộ lọc tìm kiếm</h3>
+
+                <div class="filter-group">
+                    <h4>Theo danh mục</h4>
+                    <label><input type="checkbox"> Theo danh mục</label>
+                    <label><input type="checkbox"> Men's wear</label>
+                    <label><input type="checkbox"> Women's wear</label>
+                    <label><input type="checkbox"> Shoes</label>
+                    <label><input type="checkbox"> Accessory</label>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Nơi bán</h4>
+                    <label><input type="checkbox"> Hà Nội</label>
+                    <label><input type="checkbox"> Thái Bình</label>
+                    <label><input type="checkbox"> Hải Dương</label>
+                    <label><input type="checkbox"> Bắc Ninh</label>
+                </div>
+                
+                <div class="filter-group">
+                    <h4>Đơn vị vận chuyển</h4>
+                    <label><input type="checkbox"> Tiết kiệm</label>
+                    <label><input type="checkbox"> Hỏa tốc</label>
+                    <label><input type="checkbox"> Bình thường</label>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Tình trạng</h4>
+                    <label><input type="checkbox"> Mới</label>
+                    <label><input type="checkbox"> Cũ</label>
+                </div>
+
+                <div class="filter-group price-range">
+                    <h4>Khoảng giá</h4>
+                    <input type="text" placeholder="Từ"> - 
+                    <input type="text" placeholder="Đến">
+                    <button class="btn-apply">ÁP DỤNG</button>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Thêm</h4>
+                    <button class="btn-apply">ÁP DỤNG</button>
+                </div>
+                
+            </aside>
+            
+            <section class="search-results">
+                <div class="results-header">
+                    <p class="search-query-info"><i class="fas fa-search"></i> Kết quả tìm kiếm theo khóa: **Men's wear**</p>
+                    <div class="sort-options">
+                        Sắp xếp theo: 
+                        <button class="btn-sort active">Liên quan</button>
+                        <button class="btn-sort">Mới nhất</button>
+                        <button class="btn-sort">Bán chạy</button>
+                        <select class="select-price">
+                            <option>Giá</option>
+                        </select>
+                        <span class="pagination-info">1/42</span>
+                    </div>
+                </div>
+
+                <div class="product-grid">
+                    <div class="product-item">
+    <a href="product.html?id=white_blazer" class="product-image-link">
+        <img src="image/ao vest.jpg" alt="White Blazer">
+        <div class="discount-badge">-50%</div> 
+    </a>
+    
+    <p class="product-name">
+        <a href="product.html?id=white_blazer" class="product-name-link">White Blazer</a>
+    </p>
+
+    <p class="product-price">400.000₫ <span class="original-price">800.000₫</span></p>
+    
+    <div class="product-meta">
+        <i class="fas fa-star"></i> 4.5 | Đã bán 100
+    </div>
+</div>
+
+
+                    <div class="product-item">...</div>
+                    <div class="product-item">...</div>
+                    <div class="product-item">...</div>
+                    <div class="product-item">...</div>
+                    <div class="product-item">...</div>
+                </div>
+
+                <div class="pagination-controls">
+                    <button><i class="fas fa-chevron-left"></i></button>
+                    <span class="page-number active">1</span>
+                    <span class="page-number">2</span>
+                    <button><i class="fas fa-chevron-right"></i></button>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        </footer>
+
+</body>
+</html>

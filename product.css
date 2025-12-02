@@ -1,0 +1,385 @@
+/* --- CSS CHO TRANG CHI TIẾT SẢN PHẨM (product.html) --- */
+
+/* Các biến màu được kế thừa từ homepage.css */
+
+.product-page-main {
+    padding: 20px 0;
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto;
+}
+.breadcrumb {
+    font-size: 0.9rem;
+    color: #999;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+.breadcrumb a {
+    color: #999;
+    transition: color 0.2s;
+}
+.breadcrumb a:hover {
+    color: #000;
+}
+
+
+/* --- KHỐI CHÍNH: 2 CỘT --- */
+.product-detail-section {
+    display: flex;
+    gap: 40px;
+    padding: 0 20px;
+    background: #fff; /* Nền trắng */
+}
+
+.product-gallery {
+    width: 45%; 
+}
+.main-product-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.product-info-area {
+    width: 55%; 
+}
+
+/* Định dạng Tiêu đề và Mô tả */
+.product-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.product-meta {
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 20px;
+}
+.product-meta a {
+    color: #555;
+    font-weight: 500;
+}
+.short-description {
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    color: #555;
+}
+.short-description a {
+    color: var(--beige-dark);
+}
+
+/* Khu vực Giá */
+.price-box {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    padding: 15px 0;
+    margin-bottom: 20px;
+}
+.price-old {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+.price-new {
+    color: red;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+}
+.price-discount {
+    color: green;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+/* Khối chức năng (Số lượng, Thêm giỏ hàng) */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.quantity-control label {
+    font-weight: 500;
+    margin-right: 15px;
+}
+.qty-input {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.qty-input button, .qty-input input {
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+}
+.qty-input button {
+    background: #f8f8f8;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.qty-input input {
+    width: 50px;
+    outline: none;
+}
+.action-buttons button {
+    padding: 15px 30px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-right: 10px;
+}
+.btn-add-to-cart {
+    background: var(--beige-dark);
+    color: #fff;
+}
+.btn-add-to-cart:hover {
+    background: #d1c5ae;
+}
+.btn-buy-now {
+    background: #fff;
+    color: var(--beige-dark);
+    border: 1px solid var(--beige-dark);
+}
+.btn-buy-now:hover {
+    background: var(--beige-light);
+}
+
+/* --- SẢN PHẨM BÁN CHẠY KHÁC --- */
+.related-products-section {
+    padding: 40px 20px;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+}
+.related-products-section .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+.related-product-grid {
+    display: flex;
+    gap: 20px;
+}
+.related-product-grid .product-card-small {
+    flex: 1;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    text-align: center;
+    padding-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+}
+.related-product-grid .product-card-small .card-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+}
+.related-product-grid .product-card-small .discount-tag {
+    top: 10px;
+    left: 10px;
+    font-size: 0.7rem;
+}
+.related-product-grid .product-card-small .card-info {
+    padding: 10px 5px;
+}
+.related-product-grid .product-card-small .card-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+.related-product-grid .product-card-small .card-price {
+    color: red;
+    font-weight: 600;
+}
+
+/* --- ĐÁNH GIÁ VÀ BÌNH LUẬN --- */
+.review-section {
+    padding: 40px 20px;
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.review-summary-area {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+.review-average-box, .star-breakdown, .write-review-box {
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: #fff;
+}
+.review-average-box {
+    flex: 1;
+    text-align: center;
+}
+.review-average-box .average-score {
+    margin-top: 10px;
+}
+.review-average-box .score-number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--beige-dark);
+}
+.review-average-box .stars .fas {
+    color: orange;
+    margin: 0 2px;
+}
+.write-review-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.star-breakdown {
+    flex: 2;
+    padding-right: 40px;
+}
+
+/* Chi tiết đánh giá sao */
+.star-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.star-row span {
+    width: 30px;
+    text-align: right;
+    margin-right: 10px;
+    font-size: 0.9rem;
+}
+.star-row .fas {
+    color: orange;
+    margin-left: 3px;
+}
+.progress-bar {
+    flex-grow: 1;
+    height: 8px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+.progress-bar div {
+    height: 100%;
+    background: orange;
+    border-radius: 4px;
+}
+
+/* Nút Viết Đánh giá */
+.btn-write-review {
+    background: var(--beige-light);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+.btn-write-review:hover {
+    background: #e0d6c2;
+}
+
+
+/* --- BÌNH LUẬN --- */
+.comment-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+.comment-input-area {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.comment-input-area i {
+    font-size: 1.2rem;
+    margin-right: 10px;
+    color: #999;
+}
+.comment-input-area p {
+    color: #999;
+}
+
+.comment-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.comment-list-header select {
+    border: 1px solid var(--border-color);
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.user-comment-thread {
+    margin-bottom: 20px;
+}
+.user-comment, .reply-comment {
+    display: flex;
+    margin-bottom: 15px;
+}
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+.comment-content-box {
+    flex-grow: 1;
+    background: #f5f5f5; 
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+.user-name {
+    font-weight: 600;
+    margin-right: 5px;
+    color: var(--beige-dark);
+}
+.user-email {
+    color: #999;
+    font-size: 0.8rem;
+}
+.comment-text {
+    margin: 5px 0;
+}
+.comment-actions {
+    font-size: 0.8rem;
+    color: #999;
+}
+.comment-actions i, .comment-actions a {
+    margin-right: 5px;
+    cursor: pointer;
+}
+.comment-actions i {
+    color: #999;
+    transition: color 0.2s;
+}
+.comment-actions i:hover {
+    color: var(--beige-dark);
+}
+
+.reply-comment {
+    margin-left: 50px; 
+}

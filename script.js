@@ -1,52 +1,41 @@
+// ====== FILE: script.js (PHIÊN BẢN 4 SLIDE BANNER) ======
 
-// --- JAVASCRIPT: LOGIC ĐĂNG NHẬP/ĐĂNG KÝ VỚI SQLITE (BACKEND) ---
-
-// Lấy các phần tử form
+// Lấy các phần tử form (index.html)
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
 const forgotForm = document.getElementById('forgot-form');
 
-// Require sqlite3 and crypto-js (chạy trên Node.js backend hoặc preload Electron)
-// const sqlite3 = require('sqlite3').verbose();
-// const CryptoJS = require('crypto-js');
-
-// --- 1. CÁC HÀM CHUYỂN ĐỔI FORM ---
+// --- 1. CÁC HÀM CHUYỂN ĐỔI FORM (cho index.html) ---
 function showLogin() {
-    loginForm.classList.add('active');
-    registerForm.classList.remove('active');
-    forgotForm.classList.remove('active');
+    if (loginForm) loginForm.classList.add('active');
+    if (registerForm) registerForm.classList.remove('active');
+    if (forgotForm) forgotForm.classList.remove('active');
 }
 function showRegister() {
-    loginForm.classList.remove('active');
-    registerForm.classList.add('active');
-    forgotForm.classList.remove('active');
+    if (loginForm) loginForm.classList.remove('active');
+    if (registerForm) registerForm.classList.add('active');
+    if (forgotForm) forgotForm.classList.remove('active');
 }
 function showForgot() {
-    loginForm.classList.remove('active');
-    registerForm.classList.remove('active');
-    forgotForm.classList.add('active');
+    if (loginForm) loginForm.classList.remove('active');
+    if (registerForm) registerForm.classList.remove('active');
+    if (forgotForm) forgotForm.classList.add('active');
 }
 
-// --- 2. HÀM LẤY THỜI GIAN HIỆN TẠI ĐỊNH DẠNG YYYY-MM-DD HH:MM:SS ---
+// --- HÀM HỖ TRỢ CHUNG ---
 function getCurrentDateTime() {
     const now = new Date();
     const pad = n => n < 10 ? '0' + n : n;
     return now.getFullYear() + '-' + pad(now.getMonth() + 1) + '-' + pad(now.getDate()) + ' '
         + pad(now.getHours()) + ':' + pad(now.getMinutes()) + ':' + pad(now.getSeconds());
 }
-
-// --- 3. HÀM HASH PASSWORD (SHA-256) ---
 function hashPassword(password) {
-    // Nếu dùng frontend, có thể dùng CryptoJS hoặc Web Crypto API
-    // return CryptoJS.SHA256(password).toString();
     if (window.crypto && window.crypto.subtle) {
-        // Web Crypto API (async)
         const encoder = new TextEncoder();
         return window.crypto.subtle.digest('SHA-256', encoder.encode(password)).then(buf => {
             return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
         });
     } else {
-        // Fallback: simple hash (not secure, for demo only)
         let hash = 0;
         for (let i = 0; i < password.length; i++) {
             hash = ((hash << 5) - hash) + password.charCodeAt(i);
@@ -55,167 +44,231 @@ function hashPassword(password) {
         return Promise.resolve(hash.toString());
     }
 }
+function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
 
-// --- 4. ĐĂNG KÝ: LƯU THÔNG TIN VÀO BẢNG CUSTOMERS VÀ ACCOUNT_CUSTOMERS ---
-// Hàm này sẽ gửi request đến backend Node.js để thực hiện lưu vào SQLite
+// --- 2. LOGIC ĐĂNG KÝ/ĐĂNG NHẬP/RESET PASS (cho index.html) ---
 function register() {
     const name = document.getElementById('reg-name').value;
     const email = document.getElementById('reg-email').value;
     const pass = document.getElementById('reg-pass').value;
     const confirmPass = document.getElementById('reg-confirm-pass').value;
-    const birthday = document.querySelector('input[type="date"]').value;
-    const gender = document.querySelector('input[name="gender"]:checked')?.value || '';
+    
+    if (pass !== confirmPass) { alert("Mật khẩu xác nhận không khớp!"); return; }
 
-    if (pass !== confirmPass) {
-        alert("Mật khẩu xác nhận không khớp! Vui lòng kiểm tra lại.");
-        return;
-    }
-
-    // Hash password và gửi request đến backend
     hashPassword(pass).then(hashedPass => {
-        const data = {
-            name,
-            email,
-            birthday,
-            gender,
-            password: hashedPass,
-            create_time: getCurrentDateTime()
-        };
-        // Gửi request đến backend Node.js (giả lập bằng fetch)
-        fetch('http://localhost:8080/api/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        .then(res => res.json())
-        .then(result => {
-            if (result.success) {
-                alert("Đăng ký thành công! Hãy đăng nhập ngay.");
-                showLogin();
-            } else {
-                alert(result.message || "Đăng ký thất bại!");
-            }
-        })
-        .catch(() => {
-            // Fallback localStorage nếu không kết nối được backend
-            let userList = JSON.parse(localStorage.getItem('listUsers')) || [];
-            const isExist = userList.some(user => user.email === email);
-            if (isExist) {
-                alert("Email này đã được đăng ký! Vui lòng dùng email khác.");
-                return;
-            }
-            userList.push({ name, email, password: hashedPass, birthday, gender });
-            localStorage.setItem('listUsers', JSON.stringify(userList));
-            alert("Đăng ký thành công (local)! Hãy đăng nhập ngay.");
-            showLogin();
-        });
+        let userList = JSON.parse(localStorage.getItem('listUsers')) || [];
+        const isExist = userList.some(user => user.email === email);
+        if (isExist) { alert("Email này đã được đăng ký!"); return; }
+        
+        userList.push({ name, email, password: hashedPass });
+        localStorage.setItem('listUsers', JSON.stringify(userList));
+        alert("Đăng ký thành công (local)! Hãy đăng nhập ngay.");
+        showLogin();
     });
 }
 
-// --- 5. ĐĂNG NHẬP: TRUY VẤN TỐI ƯU BẢNG ACCOUNT_CUSTOMERS ---
-// Hàm này sẽ gửi request đến backend Node.js để kiểm tra tài khoản
 function login() {
     const inputEmail = document.getElementById('login-email').value;
     const inputPass = document.getElementById('login-pass').value;
     hashPassword(inputPass).then(hashedPass => {
-        fetch('http://localhost:8080/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: inputEmail, password: hashedPass })
-        })
-        .then(res => res.json())
-        .then(result => {
-            if (result.success) {
-                alert("Đăng nhập thành công! Chào mừng " + result.name);
-                localStorage.setItem('currentUser', result.name);
-                window.location.href = "homepage.html";
-            } else {
-                alert(result.message || "Sai Email hoặc Mật khẩu! Vui lòng kiểm tra lại.");
-            }
-        })
-        .catch(() => {
-            // Fallback localStorage nếu không kết nối được backend
-            const userList = JSON.parse(localStorage.getItem('listUsers')) || [];
-            const userFound = userList.find(user => user.email === inputEmail && user.password === hashedPass);
-            if (userFound) {
-                alert("Đăng nhập thành công! Chào mừng " + userFound.name);
-                localStorage.setItem('currentUser', userFound.name);
-                window.location.href = "homepage.html";
-            } else {
-                alert("Sai Email hoặc Mật khẩu! Vui lòng kiểm tra lại.");
-            }
-        });
+        const userList = JSON.parse(localStorage.getItem('listUsers')) || [];
+        const userFound = userList.find(user => user.email === inputEmail && user.password === hashedPass);
+        if (userFound) {
+            localStorage.setItem('currentUser', userFound.name);
+            window.location.href = "homepage.html";
+        } else {
+            alert("Sai Email hoặc Mật khẩu!");
+        }
     });
 }
 
-// --- 6. XỬ LÝ QUÊN MẬT KHẨU (CẦN BACKEND) ---
 function resetPassword() {
     const emailInput = document.getElementById('forgot-email').value;
     const newPassInput = document.getElementById('forgot-new-pass').value;
     hashPassword(newPassInput).then(hashedPass => {
-        fetch('http://localhost:8080/api/reset-password', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: emailInput, password: hashedPass })
-        })
-        .then(res => res.json())
-        .then(result => {
-            if (result.success) {
-                alert("Thành công! Mật khẩu của bạn đã được đổi.");
-                showLogin();
-            } else {
-                alert(result.message || "Lỗi: Email này chưa từng được đăng ký!");
-            }
-        })
-        .catch(() => {
-            // Fallback localStorage nếu không kết nối được backend
-            let userList = JSON.parse(localStorage.getItem('listUsers')) || [];
-            const userIndex = userList.findIndex(user => user.email === emailInput);
-            if (userIndex !== -1) {
-                userList[userIndex].password = hashedPass;
-                localStorage.setItem('listUsers', JSON.stringify(userList));
-                alert("Thành công! Mật khẩu của bạn đã được đổi (local). ");
-                showLogin();
-            } else {
-                alert("Lỗi: Email này chưa từng được đăng ký!");
-            }
-        });
+        let userList = JSON.parse(localStorage.getItem('listUsers')) || [];
+        const userIndex = userList.findIndex(user => user.email === emailInput);
+        if (userIndex !== -1) {
+            userList[userIndex].password = hashedPass;
+            localStorage.setItem('listUsers', JSON.stringify(userList));
+            alert("Thành công! Mật khẩu của bạn đã được đổi (local). ");
+            showLogin();
+        } else {
+            alert("Lỗi: Email này chưa từng được đăng ký!");
+        }
     });
 }
 
+// --- HÀM LOGOUT ---
+function logout() {
+    localStorage.removeItem('currentUser'); 
+    window.location.href = 'index.html'; 
+}
 
-// --- LOGIC HIỂN THỊ/ẨN MẬT KHẨU (KHÔNG ĐỔI) ---
-function togglePasswordVisibility(inputId, iconId) {
-    const passwordInput = document.getElementById(inputId);
-    const toggleIcon = document.getElementById(iconId);
-    if (passwordInput.type === 'password') {
-        passwordInput.type = 'text';
-        toggleIcon.classList.remove('fa-eye');
-        toggleIcon.classList.add('fa-eye-slash');
+
+// --- 3. DỮ LIỆU SẢN PHẨM (CHỈ CÓ 3 SẢN PHẨM) ---
+const productData = {
+    'white_blazer': {
+        name: "White Blazer",
+        category: "Áo Blazer",
+        price: "450.000đ",
+        old_price: "500.000đ",
+        discount: "50.000đ",
+        designer: "Minimal Design",
+        material: "Vải Lanh",
+        image_url: "image/ao vest.jpg" 
+    },
+    'white_T-shirt': {
+        name: "White T-shirt",
+        category: "Áo T-shirt",
+        price: "129.000đ",
+        old_price: "150.000đ",
+        discount: "21.000đ",
+        designer: "Minimal Design",
+        material: "Vải Cotton",
+        image_url: "image/ao vest 1.jpg" 
+    },
+    'black_blazer': {
+        name: "Black Blazer",
+        category: "Áo Blazer",
+        price: "400.000đ",
+        old_price: "450.000đ",
+        discount: "50.000đ",
+        designer: "Minimal Design",
+        material: "Da/Len Dệt Kim",
+        image_url: "image/ao vest 2.jpg" 
+    }
+};
+
+
+// --- 4. LOGIC BANNER SLIDER ---
+
+let currentSlide = 0; 
+let totalSlides;      
+let sliderTrack;      
+let sliderDotsContainer; 
+
+function updateSliderDots() {
+    if (!sliderDotsContainer) return;
+    const dots = sliderDotsContainer.querySelectorAll('.dot');
+    dots.forEach((dot, index) => {
+        dot.classList.remove('active');
+        if (index === currentSlide) {
+            dot.classList.add('active');
+        }
+    });
+}
+
+function goToSlide(index) {
+    if (!sliderTrack) return; 
+
+    // totalSlides = 4 sau khi thêm White T-shirt
+    if (index >= totalSlides) {
+        index = 0;
+    } else if (index < 0) {
+        index = totalSlides - 1;
+    }
+    currentSlide = index;
+
+    const offset = -currentSlide * 100;
+    sliderTrack.style.transform = `translateX(${offset}%)`;
+
+    updateSliderDots(); 
+}
+
+function moveSlider(direction) {
+    goToSlide(currentSlide + direction); 
+}
+
+function initSlider() {
+    sliderTrack = document.getElementById('sliderTrack');
+    sliderDotsContainer = document.getElementById('sliderDots');
+    
+    if (!sliderTrack) return; 
+
+    totalSlides = sliderTrack.querySelectorAll('.slide-item').length; // Sẽ là 4
+    goToSlide(0); 
+    
+    setInterval(() => {
+        moveSlider(1);
+    }, 5000); 
+}
+
+
+// --- 5. LOGIC KIỂM TRA ĐĂNG NHẬP ---
+function checkAuthAndInitHomepage() {
+    const welcomeElement = document.getElementById('welcome-user');
+    
+    if (!welcomeElement) return;
+
+    const currentUser = localStorage.getItem('currentUser');
+    
+    if (currentUser) {
+        welcomeElement.innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser}`;
+        // CODE CẦN THÊM/SỬA: Gán href nếu đã đăng nhập
+        welcomeElement.href = "profile.html"; // Thêm/Sửa dòng này
     } else {
-        passwordInput.type = 'password';
-        toggleIcon.classList.remove('fa-eye-slash');
-        toggleIcon.classList.add('fa-eye');
+        welcomeElement.innerHTML = `<i class="fas fa-user-circle"></i> Đăng nhập`;
+        welcomeElement.href = "index.html"; // Đảm bảo trỏ về trang login nếu chưa đăng nhập
     }
 }
+
+
+// --- 6. LOGIC LOAD CHI TIẾT SẢN PHẨM ---
+function loadProductDetail() {
+    const breadcrumb = document.querySelector('.breadcrumb');
+    if (!breadcrumb) return; 
+    
+    const productId = getQueryParam('id'); 
+    const product = productData[productId];
+
+    if (!product) {
+        alert("Sản phẩm không tồn tại. Quay về trang chủ.");
+        window.location.href = 'homepage.html';
+        return;
+    }
+    
+    // Cập nhật Tiêu đề trang
+    document.title = product.name + " - Minimal";
+
+    // Cập nhật Breadcrumb
+    breadcrumb.innerHTML = `<a href="homepage.html">Trang chủ</a> / <a href="#">${product.category}</a> / ${product.name}`;
+    
+    // Cập nhật Hình ảnh
+    const mainImage = document.querySelector('.main-product-image');
+    if (mainImage) {
+        mainImage.src = product.image_url;
+        mainImage.alt = product.name;
+    }
+
+    // Cập nhật Thông tin Sản phẩm
+    document.querySelector('.product-title').textContent = product.name;
+    document.getElementById('designer-name').textContent = product.designer;
+    document.getElementById('material-type').textContent = product.material;
+    
+    // Cập nhật Giá tiền
+    document.getElementById('product-old-price').textContent = product.old_price;
+    document.getElementById('product-new-price').textContent = product.price;
+    document.getElementById('product-discount').textContent = product.discount;
+}
+
+
+// --- HỢP NHẤT VÀ CHẠY KHI DOM TẢI XONG ---
 document.addEventListener('DOMContentLoaded', () => {
-    const toggleLoginPass = document.getElementById('toggleLoginPass');
-    if(toggleLoginPass) {
-        toggleLoginPass.addEventListener('click', () => {
-            togglePasswordVisibility('login-pass', 'toggleLoginPass');
-        });
+    
+    // 1. Logic Kiểm tra Đăng nhập & Hiển thị tên người dùng
+    checkAuthAndInitHomepage();
+
+    // 2. Khởi tạo Slider (chỉ chạy trên homepage.html)
+    if (document.getElementById('sliderTrack')) {
+        initSlider(); 
     }
-    const toggleRegPass = document.getElementById('toggleRegPass');
-    if(toggleRegPass) {
-        toggleRegPass.addEventListener('click', () => {
-            togglePasswordVisibility('reg-pass', 'toggleRegPass');
-        });
-    }
-    const toggleRegConfirmPass = document.getElementById('toggleRegConfirmPass');
-    if(toggleRegConfirmPass) {
-        toggleRegConfirmPass.addEventListener('click', () => {
-            togglePasswordVisibility('reg-confirm-pass', 'toggleRegConfirmPass');
-        });
+    
+    // 3. Load Chi tiết Sản phẩm (chỉ chạy trên product.html)
+    if (getQueryParam('id')) {
+        loadProductDetail(); 
     }
 });
-

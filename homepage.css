@@ -100,27 +100,29 @@ header {
 }
 
 /* --- 2. NAVIGATION BAR & MAIN LAYOUT --- */
-/* KHỐI .main-nav ĐÃ SỬA LẠI (Tập trung căn chỉnh) */
 .main-nav {
     background: var(--beige-dark);
     color: #fff;
     padding: 10px 50px;
     font-weight: 500;
-    
-    /* KÍCH HOẠT FLEXBOX */
     display: flex; 
-    
-    /* CĂN CHỈNH CHIỀU DỌC */
     align-items: center; 
-    
-    /* **ĐÃ XÓA:** justify-content: space-between; */
+}
+
+.menu-title {
+    display: flex;
+    align-items: center;
+}
+
+.menu-title i {
+    margin-right: 8px;
 }
 
 /* Layout 3 cột chính */
 .content-wrapper {
     display: flex;
     width: 100%;
-    max-width: 1400px; /* Giới hạn chiều rộng trang */
+    max-width: 1400px; 
     margin: 0 auto;
     padding: 20px 0;
 }
@@ -151,20 +153,16 @@ header {
     font-size: 0.7rem;
     color: #999;
 }
+
 /* ----- NOTIFICATION */
 .notification-icon {
     font-size: 1.2rem;
     color: #fff;
     cursor: pointer;
-    
-    /* ĐẨY SANG PHẢI TỰ ĐỘNG */
-    margin-left: auto; /* Đẩy hết phần tử này sang phải */
-
-    /* KHOẢNG CÁCH 3CM (khoảng 30px) so với mép phải của thanh nav */
+    margin-left: auto;
     margin-right: 30px; 
 }
 
-/* Thêm hiệu ứng hover */
 .notification-icon:hover {
     color: var(--beige-light);
 }
@@ -182,52 +180,128 @@ header {
     margin-bottom: 20px;
 }
 
-/* Slider */
-.slider-area {
-    position: relative;
-    margin-bottom: 30px;
-    overflow: hidden;
-}
-.main-banner-img {
+/* --- CSS CHO BANNER SLIDER ĐÃ SỬA --- */
+.main-banner-slider {
+    position: relative; 
     width: 100%;
-    height: 350px;
-    object-fit: cover;
-    border-radius: 5px;
+    margin-bottom: 30px; 
+    overflow: hidden; 
+    border-radius: 8px;
 }
-.slider-arrow {
+
+.slider-track {
+    display: flex; 
+    width: 100%;
+    transition: transform 0.5s ease-in-out; 
+}
+
+.slide-item {
+    min-width: 100%; 
+    flex-shrink: 0; 
+    position: relative;
+    height: 400px; 
+}
+
+.slide-item a { /* Bao quanh toàn bộ slide để cả ảnh và chữ đều là link */
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    color: #fff; /* Đảm bảo chữ bên trong link là màu trắng */
+}
+
+.slide-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+    color: #fff;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+    max-width: 80%;
+}
+
+.slide-content h1, .slide-content h2 {
+    font-size: 2.8rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.slide-content p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.btn-shop-now {
+    display: inline-block;
+    background: var(--beige-dark);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-shop-now:hover {
+    background: #d1c5ae;
+}
+
+/* Nút Điều khiển (Prev/Next) */
+.slider-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    color: #fff;
-    background: rgba(0,0,0,0.4);
-    padding: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: none;
+    padding: 10px 15px;
     cursor: pointer;
-    border-radius: 50%;
+    z-index: 10;
+    font-size: 1.8rem;
+    line-height: 1;
     transition: background 0.3s;
+    border-radius: 5px;
 }
-.slider-arrow:hover {
-    background: rgba(0,0,0,0.6);
+.slider-btn:hover {
+    background: rgba(0, 0, 0, 0.6);
 }
-.slider-arrow.left { left: 15px; }
-.slider-arrow.right { right: 15px; }
+
+.prev-btn { left: 15px; }
+.next-btn { right: 15px; }
+
+/* DOTS Điều hướng */
 .slider-dots {
     position: absolute;
     bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 10;
 }
+
 .slider-dots .dot {
     display: inline-block;
-    width: 8px;
-    height: 8px;
+    width: 10px; 
+    height: 10px;
     background: #fff;
     border-radius: 50%;
-    margin: 0 4px;
-    opacity: 0.5;
+    margin: 0 5px;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.3s, background 0.3s;
 }
+
 .slider-dots .dot.active {
     opacity: 1;
+    background: var(--beige-dark); 
 }
+/* --- KẾT THÚC CSS CHO BANNER SLIDER --- */
+
 
 /* Best Seller Box */
 .best-seller-box {
@@ -281,7 +355,7 @@ header {
 /* Product Grid */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 cột */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
 }
 .product-card {
