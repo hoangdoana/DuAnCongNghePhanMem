@@ -1,0 +1,302 @@
+/* --- CSS CHO TRANG ĐƠN HÀNG (don_hang.html) --- */
+
+:root {
+    --minimal-beige: #f1f0ec; 
+    --minimal-brown: #a08c7a;
+    --text-color: #333;
+    --light-gray: #ccc;
+    --dark-gray: #666;
+    --white: #fff; /* Thêm biến màu trắng để sử dụng rõ ràng hơn */
+}
+
+.profile-page-wrapper {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.breadcrumb {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 20px;
+    padding-left: 0; /* Đã có padding trong wrapper, bỏ padding ở đây */
+}
+
+.profile-layout {
+    display: flex;
+    gap: 20px;
+}
+
+/* --- 2.1. Thanh bên (Sidebar) --- */
+.profile-sidebar {
+    width: 250px;
+    flex-shrink: 0;
+    background-color: var(--white);
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+    height: fit-content; /* Chỉ cao bằng nội dung */
+}
+
+.profile-sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-sidebar li {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.profile-sidebar li a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
+}
+
+.profile-sidebar li a:hover {
+    background-color: #f8f8f8;
+}
+
+/* Style cho tab đang active */
+.profile-sidebar li.active {
+    background-color: var(--minimal-brown);
+}
+.profile-sidebar li.active a {
+    color: var(--white);
+    font-weight: 600;
+}
+.profile-sidebar li.active a:hover {
+    background-color: var(--minimal-brown); /* Giữ nguyên màu khi hover */
+}
+
+
+/* --- 2.2. Nội dung chính (Content) --- */
+.profile-content {
+    flex-grow: 1;
+    background-color: var(--white);
+}
+
+.order-content-container {
+    border: 1px solid #eee;
+    padding: 0;
+}
+
+/* --- Tab Điều hướng --- */
+.order-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    background-color: var(--white);
+    padding: 0 10px;
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--dark-gray);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.tab-button:hover {
+    color: var(--minimal-brown);
+}
+
+.tab-button.active {
+    color: var(--minimal-brown);
+    border-bottom: 3px solid var(--minimal-brown);
+}
+
+/* --- Thanh tìm kiếm nội dung --- */
+.order-search-bar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    background-color: #fafafa;
+}
+
+.order-search-bar i {
+    color: #999;
+    margin-right: 10px;
+}
+
+.order-search-bar input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--dark-gray);
+    background-color: transparent;
+}
+.order-search-bar input::placeholder {
+    color: #aaa;
+    font-style: italic;
+}
+
+
+/* --- Card Đơn hàng --- */
+.tab-content {
+    padding: 10px 20px 20px;
+}
+
+.order-item-card {
+    border: 1px solid #eee;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.order-header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--minimal-beige);
+    margin-bottom: 15px;
+}
+
+.order-header i {
+    color: var(--minimal-brown);
+    margin-right: 5px;
+}
+
+.order-status {
+    font-weight: 600;
+    font-size: 1rem;
+}
+.order-status.completed {
+    color: #4CAF50; /* Xanh lá cho Đã Giao */
+}
+.order-status.cancelled {
+    color: #F44336; /* Đỏ cho Đã Hủy */
+}
+
+.order-body {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--minimal-beige);
+}
+
+.order-product-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+.product-info-order {
+    flex-grow: 1;
+}
+.product-info-order h4 {
+    margin: 0 0 5px 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+.product-info-order p {
+    margin: 2px 0;
+    font-size: 0.85rem;
+    color: var(--dark-gray);
+}
+
+.product-price-order {
+    text-align: right;
+    width: 150px; /* Cố định chiều rộng cột giá */
+}
+
+.product-price-order .price-old {
+    font-size: 0.8rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.product-price-order .price-new {
+    font-size: 1.1rem;
+    color: #F44336; /* Màu đỏ cho giá mới */
+    font-weight: 700;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.product-price-order .product-sku {
+    font-size: 0.75rem;
+    color: #aaa;
+}
+
+
+/* --- Order Footer --- */
+.order-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-top: 15px;
+    gap: 20px;
+}
+
+.total-payment {
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+.total-payment i {
+    margin-right: 5px;
+    color: var(--minimal-brown);
+}
+
+.total-payment .final-total-price {
+    color: #F44336;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.order-actions button {
+    padding: 8px 15px;
+    /* Dùng viền và màu chữ của màu chủ đạo */
+    border: 1px solid var(--minimal-brown); 
+    background: none;
+    color: var(--minimal-brown); 
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    margin-left: 10px;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+}
+
+/* Áp dụng kiểu thống nhất cho tất cả các nút hành động (mua lại, bình luận, hủy) */
+.btn-mua-lai,
+.btn-binh-luan,
+.btn-huy {
+    /* Đã được thiết lập chung ở .order-actions button */
+    background-color: var(--white);
+    color: var(--minimal-brown);
+    border: 1px solid var(--minimal-brown);
+}
+
+.btn-mua-lai:hover,
+.btn-binh-luan:hover, 
+.btn-huy:hover {
+    background-color: var(--minimal-beige);
+    color: var(--minimal-brown);
+}
+
+/* Đảm bảo Avatar trong Top Header được hiển thị đúng */
+.user-avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 5px;
+}

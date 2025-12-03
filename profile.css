@@ -2,66 +2,80 @@
 /* === FILE: profile.css (STYLE CHO TRANG PROFILE) === */
 /* ================================================= */
 
+/* Thiết lập các biến màu (Giả định rằng bạn đã định nghĩa chúng trong homepage.css hoặc tại đây) */
+:root {
+    --minimal-brown: #a08c7a; /* Màu nâu be chủ đạo */
+    --minimal-beige: #f1f0ec; /* Màu nền nhạt (dùng cho hover) */
+    --text-color: #333;
+    --dark-gray: #666;
+    --border-color: #e0e0e0;
+    --white: #fff;
+}
+
+
 /* ------------------------------------------- */
 /* --- 1. GLOBAL LAYOUT VÀ BỐ CỤC CHUNG --- */
-/* (Phụ thuộc vào các biến màu trong homepage.css) */
 /* ------------------------------------------- */
 
 .profile-main {
     padding: 30px 0 60px;
-    background-color: #fff; 
+    background-color: #f8f8f8; /* Nền ngoài nhạt */
     max-width: 1200px;
     margin: 0 auto;
     width: 90%;
 }
 
-/* Khung ngoài bao quanh cả Sidebar và Content, sử dụng màu be nhạt làm viền */
+/* Khung ngoài bao quanh cả Sidebar và Content */
 .profile-container {
     display: flex;
     align-items: flex-start;
-    border: 1px solid var(--beige-dark); 
-    background-color: #fff;
+    /* Sử dụng viền nhạt và nền trắng nhất quán */
+    border: 1px solid var(--border-color); 
+    background-color: var(--white);
+    box-shadow: 0 0 10px rgba(0,0,0,0.02); /* Thêm bóng nhẹ */
 }
 
 /* --- BREADCRUMB (Đường dẫn) --- */
 .breadcrumb {
     font-size: 0.9rem;
-    color: #999;
+    color: var(--dark-gray);
     margin-bottom: 20px;
 }
 .breadcrumb a {
-    color: #999;
+    color: var(--dark-gray);
 }
 
 
 /* ------------------------------------------- */
 /* --- 2. LOGO VÀ HEADER STYLE --- */
-/* (Đồng bộ style Logo từ homepage.css) */
 /* ------------------------------------------- */
 
 .main-header .logo {
     font-family: 'Dancing Script', cursive;
     font-size: 2.5rem;
     font-weight: 700;
-    /* Sử dụng biến màu chủ đạo từ homepage.css */
-    color: var(--beige-dark); 
+    /* Đồng bộ với màu chủ đạo của Đơn hàng */
+    color: var(--minimal-brown); 
 }
 
 /* Nút Đăng xuất trên thanh top header */
 .top-header .account-actions a {
     margin-left: 15px;
-    color: var(--text-color);
+    color: var(--dark-gray);
 }
 
 
 /* ------------------------------------------- */
 /* --- 3. PROFILE SIDEBAR (MENU TRÁI) --- */
+/* --- ĐÃ ĐỒNG BỘ MÀU SẮC VỚI DON_HANG.CSS --- */
 /* ------------------------------------------- */
 
 .profile-sidebar {
     width: 250px;
     flex-shrink: 0;
     margin-right: -1px; 
+    border-right: 1px solid var(--border-color); /* Thêm viền phải rõ hơn */
+    background-color: var(--white);
 }
 
 .profile-sidebar ul {
@@ -73,19 +87,31 @@
 .profile-sidebar li a {
     display: block;
     padding: 15px 20px;
-    border: 1px solid var(--border-color); /* Sử dụng border color từ homepage.css */
-    margin-bottom: -1px;
-    color: #333;
+    /* Giữ nguyên kiểu viền ngang */
+    border-bottom: 1px solid var(--border-color); 
+    color: var(--dark-gray);
     font-weight: 500;
-    background-color: #fff;
-    transition: all 0.3s;
+    background-color: var(--white);
+    transition: all 0.2s;
+}
+
+.profile-sidebar li a:hover {
+    background-color: var(--minimal-beige); /* Màu nền nhạt khi hover */
+    color: var(--minimal-brown);
 }
 
 /* Trạng thái Menu đang hoạt động (ACTIVE) */
 .profile-sidebar li.active a {
-    background-color: #666; 
-    color: #fff;
-    border-color: #666;
+    /* MÀU CHỦ ĐẠO TỪ DON_HANG.CSS */
+    background-color: var(--minimal-brown); 
+    color: var(--white);
+    font-weight: 600;
+    border-color: var(--minimal-brown);
+}
+/* Đảm bảo khi active không bị hover thay đổi màu */
+.profile-sidebar li.active a:hover {
+    background-color: var(--minimal-brown); 
+    color: var(--white);
 }
 
 
@@ -100,9 +126,11 @@
 
 .profile-content h2 {
     font-size: 1.8rem;
-    font-weight: 400; 
-    color: #555;
+    font-weight: 600; /* Tăng độ đậm để nổi bật hơn */
+    color: var(--minimal-brown); /* Sử dụng màu chủ đạo cho tiêu đề */
     margin-bottom: 30px;
+    border-bottom: 1px solid var(--minimal-beige);
+    padding-bottom: 10px;
 }
 
 /* Cấu trúc Grid cho Form (2 cột) */
@@ -110,13 +138,15 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 50px; 
-    row-gap: 20px;    
+    row-gap: 20px; 
 }
 
 .form-group label {
     font-size: 0.9rem;
-    color: #888;
+    color: var(--dark-gray);
     margin-bottom: 5px;
+    display: block; /* Đảm bảo label là block để căn chỉnh dễ hơn */
+    font-weight: 500;
 }
 
 .full-width {
@@ -133,15 +163,15 @@
     border: none;
     padding: 0;
     margin-top: 0;
-    font-size: 1.1rem;
-    color: #333;
+    font-size: 1rem;
+    color: var(--text-color);
     background: transparent;
     pointer-events: none; 
 }
 
 /* Đường nét đứt cho Mô tả */
 #view-section .full-width > div { 
-    border-bottom: 1px dotted #ccc; 
+    border-bottom: 1px dotted var(--light-gray); 
     padding: 10px 0;
     margin-top: 5px;
     min-height: 25px;
@@ -154,16 +184,18 @@
 
 /* Khung Input có viền (input-box) */
 .input-box {
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 10px 15px;
     font-size: 1rem;
     width: 100%;
     margin-top: 0;
     outline: none;
+    color: var(--text-color);
 }
 .input-box:focus {
-    border-color: #999;
+    border-color: var(--minimal-brown); /* Viền màu nâu khi focus */
+    box-shadow: 0 0 0 1px var(--minimal-brown);
 }
 
 /* Textarea (Mô tả) */
@@ -176,7 +208,7 @@
 .radio-group {
     display: flex;
     align-items: center;
-    padding-top: 5px; /* Căn chỉnh với input bên cạnh */
+    padding-top: 5px; 
 }
 .radio-options {
     display: flex;
@@ -187,7 +219,7 @@
     display: flex;
     align-items: center;
     font-size: 1rem;
-    color: #333;
+    color: var(--text-color);
 }
 .radio-options input {
     margin-right: 5px;
@@ -209,29 +241,29 @@
 
 /* Nút chính (Thay đổi / Cập nhật) - Sử dụng màu chủ đạo */
 .btn-update {
-    background-color: var(--beige-dark); 
-    color: #fff;
+    background-color: var(--minimal-brown); /* MÀU CHỦ ĐẠO */
+    color: var(--white);
     border: none;
     padding: 12px 25px;
     font-weight: 600;
     border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.2s;
 }
 .btn-update:hover {
-    background-color: #d1c5ae;
+    background-color: #8f7966; /* Màu đậm hơn khi hover */
 }
 
 /* Nút phụ (Hủy bỏ) */
 .btn-cancel {
-    background-color: #f1f1f1;
-    color: #555;
-    border: 1px solid #ccc;
+    background-color: var(--minimal-beige);
+    color: var(--dark-gray);
+    border: 1px solid var(--border-color);
     padding: 12px 25px;
     font-weight: 600;
     border-radius: 4px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.2s;
 }
 .btn-cancel:hover {
     background-color: #e0e0e0;
@@ -257,14 +289,21 @@
     .profile-sidebar {
         width: 100%;
         margin-bottom: 10px;
+        border: 1px solid var(--border-color);
+    }
+    .profile-sidebar li a {
+        border: none;
+        border-bottom: 1px solid var(--border-color);
     }
     #view-section form, #edit-section form {
         grid-template-columns: 1fr; 
+        column-gap: 0;
     }
     .full-width, .action-buttons {
         grid-column: span 1;
     }
     .action-buttons {
         flex-direction: column;
+        gap: 10px;
     }
 }

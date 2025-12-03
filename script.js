@@ -1,4 +1,4 @@
-// ====== FILE: script.js (PHIÊN BẢN 4 SLIDE BANNER) ======
+// ====== FILE: script.js (PHIÊN BẢN MỚI NHẤT CÓ AC AUTOCOMPLETE) ======
 
 // Lấy các phần tử form (index.html)
 const loginForm = document.getElementById('login-form');
@@ -138,7 +138,7 @@ const productData = {
         old_price: "450.000đ",
         discount: "50.000đ",
         designer: "Minimal Design",
-        material: "Da/Len Dệt Kim",
+         material: "Da/Len Dệt Kim",
         image_url: "image/ao vest 2.jpg" 
     }
 };
@@ -246,18 +246,163 @@ function loadProductDetail() {
 
     // Cập nhật Thông tin Sản phẩm
     document.querySelector('.product-title').textContent = product.name;
-    document.getElementById('designer-name').textContent = product.designer;
-    document.getElementById('material-type').textContent = product.material;
+    // Cần đảm bảo các ID này đã có trong HTML
+    // document.getElementById('designer-name').textContent = product.designer;
+    // document.getElementById('material-type').textContent = product.material;
     
     // Cập nhật Giá tiền
-    document.getElementById('product-old-price').textContent = product.old_price;
-    document.getElementById('product-new-price').textContent = product.price;
-    document.getElementById('product-discount').textContent = product.discount;
+    // Cần đảm bảo các ID này đã có trong HTML
+    // document.getElementById('product-old-price').textContent = product.old_price;
+    // document.getElementById('product-new-price').textContent = product.price;
+    // document.getElementById('product-discount').textContent = product.discount;
 }
+
+
+// =======================================================
+// CHỨC NĂNG BỔ SUNG ĐÃ CÓ: Tăng/Giảm Số lượng Sản phẩm
+// =======================================================
+function setupQuantityControls() {
+    // 1. Tìm khối điều khiển số lượng (Chỉ chạy trên trang product.html)
+    const quantityControl = document.querySelector('.quantity-control');
+    if (!quantityControl) return; 
+
+    const minusButton = quantityControl.querySelector('.qty-input button:first-child');
+    const plusButton = quantityControl.querySelector('.qty-input button:last-child');
+    const quantityInput = document.getElementById('quantity');
+
+    // Đảm bảo các phần tử tồn tại trước khi thêm sự kiện
+    if (!minusButton || !plusButton || !quantityInput) return;
+
+    // 2. Lắng nghe sự kiện GIẢM
+    minusButton.addEventListener('click', () => {
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) { // Đảm bảo số lượng không nhỏ hơn 1
+            quantityInput.value = currentValue - 1;
+        }
+    });
+
+    // 3. Lắng nghe sự kiện TĂNG
+    plusButton.addEventListener('click', () => {
+        let currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    });
+
+    // 4. Xử lý khi người dùng nhập trực tiếp (đảm bảo là số và >= 1)
+    quantityInput.addEventListener('change', () => {
+        let currentValue = parseInt(quantityInput.value);
+        if (isNaN(currentValue) || currentValue < 1) {
+            // Đặt lại về 1 nếu nhập không hợp lệ
+            quantityInput.value = 1; 
+        } else {
+            // Cập nhật giá trị đã được làm tròn
+            quantityInput.value = currentValue; 
+        }
+    });
+}
+
+
+// -------------------------------------------------------------
+// --- 7. CHỨC NĂNG BỔ SUNG: Gợi ý Tìm kiếm (Autocomplete) ---
+// -------------------------------------------------------------
+
+// Hàm chuyển hướng đến trang kết quả tìm kiếm (hoặc chi tiết)
+function performSearch(query) {
+    if (query.trim() === '') return;
+
+    // TÌM ID SẢN PHẨM: Nếu tên sản phẩm khớp hoàn toàn, chuyển đến trang chi tiết
+    const matchedProductKey = Object.keys(productData).find(key => 
+        productData[key].name.toLowerCase() === query.toLowerCase().trim()
+    );
+
+    if (matchedProductKey) {
+        // Chuyển đến trang chi tiết sản phẩm nếu tìm thấy tên chính xác
+        window.location.href = `product.html?id=${matchedProductKey}`;
+    } else {
+        // Nếu không khớp chính xác, chuyển đến trang tìm kiếm chung
+        window.location.href = `product_search.html?query=${encodeURIComponent(query)}`;
+    }
+}
+
+function setupSearchAutocomplete() {
+    const searchInput = document.getElementById('searchInput');
+    const resultsDropdown = document.getElementById('searchResultsDropdown');
+    const searchButton = document.getElementById('searchButton'); // Đã thêm ID trong bước HTML trước
+    
+    // Kiểm tra các phần tử HTML cần thiết
+    if (!searchInput || !resultsDropdown || !searchButton) return; 
+
+    // Lấy tên tất cả các sản phẩm
+    const productNames = Object.values(productData).map(p => p.name);
+
+    // Xử lý sự kiện gõ phím
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase().trim();
+        resultsDropdown.innerHTML = ''; 
+
+        if (query.length === 0) {
+            resultsDropdown.style.display = 'none';
+            return;
+        }
+
+        // Lọc sản phẩm theo chữ cái đầu hoặc tên
+        const filteredResults = productNames.filter(name => 
+            name.toLowerCase().startsWith(query) || name.toLowerCase().includes(query)
+        ).slice(0, 5); // Giới hạn 5 kết quả
+
+        if (filteredResults.length > 0) {
+            filteredResults.forEach(name => {
+                const item = document.createElement('div');
+                item.classList.add('autocomplete-item');
+                
+                // Highlight từ khóa khớp
+                const regex = new RegExp(`(${query})`, 'gi');
+                item.innerHTML = name.replace(regex, '<b>$1</b>'); // Dùng <b> cho đậm
+                
+                // Xử lý sự kiện khi click vào một gợi ý
+                item.addEventListener('click', () => {
+                    searchInput.value = name; // Đưa tên sản phẩm lên thanh tìm kiếm
+                    resultsDropdown.style.display = 'none'; // Ẩn dropdown
+                    performSearch(name); // Chuyển đến trang sản phẩm
+                });
+                
+                resultsDropdown.appendChild(item);
+            });
+            resultsDropdown.style.display = 'block';
+        } else {
+            resultsDropdown.style.display = 'none';
+        }
+    });
+
+    // Ẩn dropdown khi click ra ngoài
+    document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !resultsDropdown.contains(e.target) && !searchButton.contains(e.target)) {
+            resultsDropdown.style.display = 'none';
+        }
+    });
+    
+    // Xử lý sự kiện khi bấm nút Tìm kiếm
+    searchButton.addEventListener('click', () => {
+        performSearch(searchInput.value);
+    });
+
+    // Xử lý sự kiện khi nhấn Enter
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault(); 
+            performSearch(searchInput.value);
+        }
+    });
+}
+
+// -------------------------------------------------------------
 
 
 // --- HỢP NHẤT VÀ CHẠY KHI DOM TẢI XONG ---
 document.addEventListener('DOMContentLoaded', () => {
+
+    // (Đã có sẵn) Thiết lập chức năng tăng/giảm số lượng sản phẩm
+    // LƯU Ý: Vị trí của hàm setupQuantityControls() trong khối DOMContentLoaded không phù hợp, 
+    // nên tôi sẽ di chuyển nó vào trong khối if(getQueryParam('id')) để chỉ chạy trên product.html.
     
     // 1. Logic Kiểm tra Đăng nhập & Hiển thị tên người dùng
     checkAuthAndInitHomepage();
@@ -270,5 +415,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Load Chi tiết Sản phẩm (chỉ chạy trên product.html)
     if (getQueryParam('id')) {
         loadProductDetail(); 
+        // Đặt hàm Quantity Control ở đây để chỉ chạy trên trang chi tiết
+        setupQuantityControls(); 
     }
+    
+    // 4. Kích hoạt tính năng Gợi ý Tìm kiếm (chủ yếu trên homepage.html)
+    setupSearchAutocomplete(); 
 });

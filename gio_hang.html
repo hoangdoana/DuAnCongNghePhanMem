@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ Hàng (0) - Minimal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage.css"> 
+    <link rel="stylesheet" href="gio_hang.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="top-header">
+            <div class="top-left">
+                <a href="#"><i class="fas fa-question-circle"></i> Liên hệ hỗ trợ</a>
+                <a href="#"><i class="fas fa-newspaper"></i> Tin tức</a>
+                <a href="#"><i class="fas fa-tags"></i> Khuyến mãi</a>
+            </div>
+            <div class="account-actions">
+                <a href="index.html" id="welcome-user"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a> 
+            </div>
+        </div>
+        <div class="main-header">
+            <a href="homepage.html" class="logo">Minimal</a>
+            
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm">
+                    <button id="searchButton" style="width: 100px;">Tìm kiếm</button>
+                </div>
+                <div id="searchResultsDropdown" class="autocomplete-dropdown"></div>
+            </div>
+
+            <div class="cart">
+                <a href="gio_hang.html" class="cart-icon-link"><i class="fas fa-shopping-cart" style="font-size: 1.5rem;"></i> Giỏ hàng (0)</a>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="menu-title"><i class="fas fa-list"></i> Danh mục sản phẩm</div>
+        </nav>
+    </header>
+
+    <div class="cart-wrapper">
+        <div class="breadcrumb">
+            <a href="homepage.html">Trang chủ</a> > <span>Giỏ hàng</span>
+        </div>
+
+        <div class="cart-main">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th class="col-check"><input type="checkbox" id="check-all-header"></th>
+                        <th class="col-product">Sản phẩm</th>
+                        <th class="col-price">Đơn giá</th>
+                        <th class="col-qty">Số lượng</th>
+                        <th class="col-total">Số tiền</th>
+                        <th class="col-action">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-product-id="white_blazer">
+                        <td class="col-check"><input type="checkbox" checked></td>
+                        <td class="col-product-info">
+                            <img src="image/ao vest.jpg" alt="White Blazer" class="cart-product-img">
+                            <div class="product-details">
+                                <a href="#">White Blazer</a>
+                                <p>Nhà thiết kế: Minimal</p>
+                            </div>
+                        </td>
+                        <td class="col-price">
+                            <span class="price-old">180.000đ</span>
+                            <span class="price-new">120.000đ</span>
+                        </td>
+                        <td class="col-qty">
+                            <div class="quantity-control-cart">
+                                <button class="qty-minus">-</button>
+                                <input type="number" value="1" min="1" class="qty-input-cart">
+                                <button class="qty-plus">+</button>
+                            </div>
+                        </td>
+                        <td class="col-total">120.000đ</td>
+                        <td class="col-action">
+                            <button class="btn-remove">Xóa</button>
+                            <p class="similar-item">Tìm kiếm sản phẩm tương tự <i class="fas fa-angle-down"></i></p>
+                        </td>
+                    </tr>
+
+                    <tr data-product-id="white_T-shirt">
+                        <td class="col-check"><input type="checkbox" checked></td>
+                        <td class="col-product-info">
+                            <img src="image/ao vest 1.jpg" alt="White T-shirt" class="cart-product-img">
+                            <div class="product-details">
+                                <a href="#">White T-shirt</a>
+                                <p>Nhà thiết kế: Minimal</p>
+                            </div>
+                        </td>
+                        <td class="col-price">
+                            <span class="price-old">180.000đ</span>
+                            <span class="price-new">120.000đ</span>
+                        </td>
+                        <td class="col-qty">
+                            <div class="quantity-control-cart">
+                                <button class="qty-minus">-</button>
+                                <input type="number" value="1" min="1" class="qty-input-cart">
+                                <button class="qty-plus">+</button>
+                            </div>
+                        </td>
+                        <td class="col-total">120.000đ</td>
+                        <td class="col-action">
+                            <button class="btn-remove">Xóa</button>
+                            <p class="similar-item">Tìm kiếm sản phẩm tương tự <i class="fas fa-angle-down"></i></p>
+                        </td>
+                    </tr>
+                    
+                    <tr data-product-id="the_handbag">
+                        <td class="col-check"><input type="checkbox" checked></td>
+                        <td class="col-product-info">
+                            <img src="image/ao vest 2.jpg" alt="The handbag" class="cart-product-img">
+                            <div class="product-details">
+                                <a href="#">The handbag</a>
+                                <p>Nhà thiết kế: Minimal</p>
+                            </div>
+                        </td>
+                        <td class="col-price">
+                            <span class="price-old">180.000đ</span>
+                            <span class="price-new">120.000đ</span>
+                        </td>
+                        <td class="col-qty">
+                            <div class="quantity-control-cart">
+                                <button class="qty-minus">-</button>
+                                <input type="number" value="1" min="1" class="qty-input-cart">
+                                <button class="qty-plus">+</button>
+                            </div>
+                        </td>
+                        <td class="col-total">120.000đ</td>
+                        <td class="col-action">
+                            <button class="btn-remove">Xóa</button>
+                            <p class="similar-item">Tìm kiếm sản phẩm tương tự <i class="fas fa-angle-down"></i></p>
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            
+            <div class="cart-summary-fixed">
+                <div class="select-all">
+                    <input type="checkbox" id="selectAll" checked>
+                    <label for="selectAll">Chọn tất cả (4)</label>
+                    <a href="#" class="btn-delete-all">Xóa tất cả</a>
+                </div>
+                
+                <div class="checkout-details">
+                    <p>Tổng thanh toán (<span id="total-selected-items">4</span> Sản phẩm): <span class="final-total" id="final-cart-total">360.000đ</span></p>
+                    <button class="btn-mua-hang">Mua hàng</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <footer>
+        <div class="footer-cols">
+            <div class="col">
+                <h4>Về công ty</h4>
+                <p>Công Ty Minimal</p>
+            </div>
+            <div class="col">
+                <h4>Trợ giúp</h4>
+                <ul>
+                    <li>Hướng dẫn mua hàng</li>
+                    <li>Chính sách đổi trả</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Tin tức & sách</h4>
+                <ul>
+                    <li>Blog thời trang</li>
+                    <li>Chính sách bảo mật</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Chấp nhận thanh toán</h4>
+                <img src="image/payment.jpg" alt="Payment" style="max-width: 200px; height: auto;">
+            </div>
+            <div class="col">
+                <h4>Đối tác vận chuyển</h4>
+                <img src="image/shipping.jpg" alt="Shipping" style="max-width: 200px; height: auto;">
+            </div>
+        </div>
+        <div class="mobile-apps">
+            <p>Tải ứng dụng tại:</p>
+            </div>
+    </footer>
+        </footer>
+
+    <script src="script.js"></script> 
+</body>
+</html>

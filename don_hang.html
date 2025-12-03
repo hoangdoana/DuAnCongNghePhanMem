@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn hàng của bạn - Minimal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="homepage.css"> 
+    <link rel="stylesheet" href="gio_hang.css"> 
+    <link rel="stylesheet" href="don_hang.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="top-header">
+            <div class="top-left">
+                <a href="#"><i class="fas fa-question-circle"></i> Liên hệ hỗ trợ</a>
+                <a href="#"><i class="fas fa-newspaper"></i> Tin tức</a>
+                <a href="#"><i class="fas fa-tags"></i> Khuyến mãi</a>
+            </div>
+            <div class="top-right">
+                <a href="profile.html" id="welcome-user"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+            </div>
+        </div>
+        <div class="main-header">
+            <a href="homepage.html" class="logo">Minimal</a>
+            
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm">
+                    <button id="searchButton" style="width: 100px;">Tìm kiếm</button>
+                </div>
+                <div id="searchResultsDropdown" class="autocomplete-dropdown"></div>
+            </div>
+
+            <div class="cart">
+                <a href="gio_hang.html" class="cart-icon-link"><i class="fas fa-shopping-cart" style="font-size: 1.5rem;"></i> Giỏ hàng (0)</a>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="menu-title"><i class="fas fa-list"></i> Danh mục sản phẩm</div>
+        </nav>
+    </header>
+
+    <div class="profile-page-wrapper">
+        <div class="breadcrumb">
+            <a href="homepage.html">Trang chủ</a> > <span>Đơn hàng của bạn</span>
+        </div>
+
+        <div class="profile-layout">
+            <aside class="profile-sidebar">
+                <ul>
+                    <li><a href="profile.html">Thông tin cá nhân</a></li>
+                    <li class="active"><a href="don_hang.html">Đơn hàng của bạn</a></li>
+                    
+                </ul>
+            </aside>
+
+            <div class="profile-content">
+                <div class="order-content-container">
+                    
+                    <div class="order-tabs">
+                        <button class="tab-button active" data-tab="all">Tất cả</button>
+                        <button class="tab-button" data-tab="pending">Chờ giao hàng</button>
+                        <button class="tab-button" data-tab="completed">Hoàn thành</button>
+                        <button class="tab-button" data-tab="cancelled">Đã hủy</button>
+                    </div>
+                    
+                    <div class="order-search-bar">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Bạn có thể tìm kiếm theo id đơn hàng hoặc tên sản phẩm">
+                    </div>
+                    
+                    <div id="order-list" class="tab-content active">
+                        
+                        <div class="order-item-card" data-status="completed">
+                            <div class="order-header">
+                                <i class="fas fa-archive"></i>
+                                <span class="order-status completed">Đã Giao</span>
+                            </div>
+                            <div class="order-body">
+                                <img src="image/ao vest.jpg" alt="White Blazer" class="order-product-img">
+                                <div class="product-info-order">
+                                    <h4 class="product-name">White Blazer</h4>
+                                    <p>Phân loại hàng: Áo</p>
+                                    <p>Số lượng: 1</p>
+                                    <p>Ngày đặt: 12/02/2025</p>
+                                </div>
+                                <div class="product-price-order">
+                                    <p class="price-old">189.000₫</p>
+                                    <p class="price-new">120.000₫</p>
+                                    <p class="product-sku">Mã sản phẩm: 000001</p>
+                                </div>
+                            </div>
+                            <div class="order-footer">
+                                <div class="total-payment">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Thành tiền:</span>
+                                    <span class="final-total-price">120.000₫</span>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn-mua-lai">Mua lại</button>
+                                    <button class="btn-binh-luan">Bình luận sản phẩm</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-item-card" data-status="cancelled">
+                            <div class="order-header">
+                                <i class="fas fa-archive"></i>
+                                <span class="order-status cancelled">Đã Hủy</span>
+                            </div>
+                            <div class="order-body">
+                                <img src="image/ao vest 1.jpg" alt="White T-shirt" class="order-product-img">
+                                <div class="product-info-order">
+                                    <h4 class="product-name">White T-shirt</h4>
+                                    <p>Phân loại hàng: Áo</p>
+                                    <p>Số lượng: 1</p>
+                                    <p>Ngày đặt: 13/02/2025</p>
+                                </div>
+                                <div class="product-price-order">
+                                    <p class="price-old">189.000₫</p>
+                                    <p class="price-new">120.000₫</p>
+                                    <p class="product-sku">Mã sản phẩm: 111024</p>
+                                </div>
+                            </div>
+                            <div class="order-footer">
+                                <div class="total-payment">
+                                    <i class="fas fa-wallet"></i>
+                                    <span>Thành tiền:</span>
+                                    <span class="final-total-price">120.000₫</span>
+                                </div>
+                                <div class="order-actions">
+                                    <button class="btn-mua-lai">Mua lại</button>
+                                    <button class="btn-huy">Xem chi tiết hủy đơn</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-cols">
+            <div class="col">
+                <h4>Về công ty</h4>
+                <p>Công Ty Minimal</p>
+            </div>
+            <div class="col">
+                <h4>Trợ giúp</h4>
+                <ul>
+                    <li>Hướng dẫn mua hàng</li>
+                    <li>Chính sách đổi trả</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Tin tức & sách</h4>
+                <ul>
+                    <li>Blog thời trang</li>
+                    <li>Chính sách bảo mật</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Chấp nhận thanh toán</h4>
+                <img src="image/payment.jpg" alt="Payment" style="max-width: 200px; height: auto;">
+            </div>
+            <div class="col">
+                <h4>Đối tác vận chuyển</h4>
+                <img src="image/shipping.jpg" alt="Shipping" style="max-width: 200px; height: auto;">
+            </div>
+        </div>
+        <div class="mobile-apps">
+            <p>Tải ứng dụng tại:</p>
+            </div>
+        </footer>
+
+    <script src="script.js"></script>
+    <script src="don_hang.js"></script> 
+</body>
+</html>
