@@ -422,3 +422,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. Kích hoạt tính năng Gợi ý Tìm kiếm (chủ yếu trên homepage.html)
     setupSearchAutocomplete(); 
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Lấy nút 'Mua hàng' bằng ID
+    const buyButton = document.getElementById('btnBuy');
+
+    // Kiểm tra nếu nút tồn tại trên trang
+    if (buyButton) {
+        // Gắn sự kiện 'click' cho nút
+        buyButton.addEventListener('click', function() {
+            // Hiển thị thông báo xác nhận mua hàng thành công
+            alert('Xác nhận mua hàng thành công');
+
+            // TODO: Ở đây bạn sẽ thêm logic chuyển hướng (ví dụ: location.href = 'trang_cam_on.html')
+        });
+    }
+});

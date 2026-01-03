@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán - Minimal</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="thanh_toan.css">
+</head>
+<body>
+    <header>
+        <div class="top-header">
+            <div class="top-left">
+                <a href="#"><i class="fas fa-question-circle"></i> Liên hệ hỗ trợ</a>
+                <a href="#"><i class="fas fa-newspaper"></i> Tin tức</a>
+                <a href="#"><i class="fas fa-tags"></i> Khuyến mãi</a>
+            </div>
+            <div class="top-right">
+                <a href="profile.html" id="welcome-user"><i class="fas fa-user-circle"></i> Đăng nhập</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+            </div>
+        </div>
+        <div class="main-header">
+            <a href="homepage.html" class="logo">Minimal</a>
+            
+            <div class="search-container">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm">
+                    <button id="searchButton" style="width: 100px;">Tìm kiếm</button>
+                </div>
+                <div id="searchResultsDropdown" class="autocomplete-dropdown"></div>
+            </div>
+
+            <div class="cart">
+                <a href="gio_hang.html" class="cart-icon-link"><i class="fas fa-shopping-bag" style="font-size: 1.5rem;"></i> Giỏ hàng (0)</a>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="menu-title"><i class="fas fa-list"></i> Danh mục sản phẩm</div>
+        </nav>
+    </header>
+
+    <main class="checkout-page-main">
+        
+        <div class="breadcrumb">
+            <a href="homepage.html">Trang chủ</a> / <a href="gio_hang.html">Giỏ hàng</a> / <span>Thanh toán</span>
+        </div>
+
+        <div class="checkout-container">
+            
+            <div class="left-col">
+                <div class="info-section shipping-info">
+                    <h2>Thông tin giao hàng</h2>
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="name">Họ và tên *</label>
+                            <input type="text" id="name" placeholder="Họ và tên" class="full-width">
+                        </div>
+                        <div class="input-group">
+                            <label for="phone">Số điện thoại *</label>
+                            <input type="text" id="phone" placeholder="Số điện thoại" class="full-width">
+                        </div>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="city">Địa chỉ *</label>
+                        <select id="city" class="full-width">
+                            <option disabled selected>Tỉnh/Thành phố, Quận/Huyện, Phường/Xã</option>
+                            <option>Hà Nội</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="address">Địa chỉ cụ thể *</label>
+                        <input type="text" id="address" placeholder="Số nhà, tên đường,..." class="full-width">
+                    </div>
+                    
+                    <div class="address-type">
+                        <label>Loại địa chỉ</label>
+                        <div class="radio-options">
+                            <button class="btn-radio active">Nhà riêng</button>
+                            <button class="btn-radio">Văn phòng</button>
+                            <button class="btn-add-address">Thêm địa chỉ</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section product-summary">
+                    <h2>Sản phẩm</h2>
+                    <table class="product-checkout-table">
+                        <thead>
+                            <tr>
+                                <th>Sản phẩm</th>
+                                <th>Đơn giá</th>
+                                <th>Số Lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img src="white_blazer.jpg" alt="White Blazer" class="product-thumb">
+                                    White Blazzer
+                                </td>
+                                <td>120.000đ</td>
+                                <td>1</td>
+                                <td>120.000đ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="product-notes">
+                        <div class="input-group note-input-group">
+                            <label for="orderNote">Ghi chú</label>
+                            <input type="text" id="orderNote" placeholder="Dành cho đơn hàng" class="note-input">
+                        </div>
+                        <div class="shipping-fee-display">
+                            <label>Đơn vị vận chuyển:</label> <span>Giao hàng nhanh</span>
+                            <span>16.000đ</span>
+                        </div>
+                        <div class="total-summary-line">
+                            <strong>Tổng số tiền (1 sản phẩm)</strong>
+                            <strong>136.000đ</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right-col">
+                <div class="info-section payment-method-section">
+                    <h2>Phương thức thanh toán</h2>
+                    <div class="payment-box">
+                        <div class="payment-method-row">
+                            <span>Thanh toán khi nhận hàng</span>
+                            <a href="#">Thay đổi</a>
+                        </div>
+                        
+                        <div class="payment-details-summary">
+                            <div class="summary-line">
+                                <span>Số tiền sản phẩm</span>
+                                <span>120.000đ</span>
+                            </div>
+                            <div class="summary-line">
+                                <span>Phí vận chuyển</span>
+                                <span>16.000đ</span>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-buy" id="btnBuy">Mua hàng</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+   
+    
+    <footer>
+        <div class="footer-cols">
+            <div class="col">
+                <h4>Về công ty</h4>
+                <p>Công Ty Minimal</p>
+            </div>
+            <div class="col">
+                <h4>Trợ giúp</h4>
+                <ul>
+                    <li>Hướng dẫn mua hàng</li>
+                    <li>Chính sách đổi trả</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Tin tức & sách</h4>
+                <ul>
+                    <li>Blog thời trang</li>
+                    <li>Chính sách bảo mật</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h4>Chấp nhận thanh toán</h4>
+                <img src="image/payment.jpg" alt="Payment" style="max-width: 200px; height: auto;">
+            </div>
+            <div class="col">
+                <h4>Đối tác vận chuyển</h4>
+                <img src="image/shipping.jpg" alt="Shipping" style="max-width: 200px; height: auto;">
+            </div>
+        </div>
+        <div class="mobile-apps">
+            <p>Tải ứng dụng tại:</p>
+            </div>
+    </footer>
+
+    <script src="script.js"></script>
+    
+</body>
+</html>
